@@ -11,7 +11,7 @@ class Hero {
       this.w = 500 ;
       this.h = this.w/imgRatio;
     }
-    img.src = "images/cartoon-kid-png-5-transparent.png";
+    img.src = "images/kid.png";
     }
     
     //faire apparaitre le hero dans le canvas
@@ -22,15 +22,15 @@ class Hero {
 
     //faire bouger le hero à gauche 
     moveLeft(){
-        if(this.x >=0){
-            this.x -= 5;
-        }
+       // if(this.x >=0){
+            this.x -= 10;
+        //}
     }
     //faire bouger le hero à droite 
     moveRight(){
-        if(this.x <= 500){
-           this.x += 5;
-        } 
+       // if(this.x <= 500){
+           this.x += 10;
+       // } 
     }
 
     //faire bouger le hero vers le haut

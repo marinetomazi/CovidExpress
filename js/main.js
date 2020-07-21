@@ -1,10 +1,10 @@
 let hero;
 let obstacles;
+let gains;
 let gameover;
 let malus;
-let time;
-let startcounter;
-
+let bonus;
+let startAt;
 
 // ------------------------------------------------------------------------------CANVAS
 
@@ -12,10 +12,11 @@ const ctx = document.querySelector("canvas").getContext("2d");
 const W = ctx.canvas.width;
 const H = ctx.canvas.height;
 
-// -----------------------------------------------------------------------------DRAWING
+// -----------------------------------------------------------------------------DRAWING x 1
 
+// téléchargment de l'image
 const metro = new Image();
-metro.src = "./images/metro NB.jpg" // telechargement
+metro.src = "./images/metro NB.jpg" 
 
 // mouvements du hero en réponse aux touches
 document.onkeydown = function (e) {
@@ -27,9 +28,12 @@ document.onkeydown = function (e) {
     case 40: hero.moveDown(); console.log('right', hero); break;
   }
 }
-function draw(){
 
-  // appelee toutes les 16ms
+//-----------------------------------------------------------------------------DRAWING x toutes les 16milisec
+
+function draw(){
+  
+ 
   ctx.clearRect(0,0,W,H); // eponge
 
   //----------------------------------------METRO & HERO
@@ -50,34 +54,67 @@ function draw(){
     element.draw(); 
   });
 
-  //--------------------------------------COLLISIONS 
-
-  for (const obst of obstacles) {
-    if (obst.hit(hero)) {
-      console.log("-2 points");
-      //gameover = true;
-      malus -= 2;
-      obstacles.splice(0,obst.hit(hero));
+  //----------------------------------------MASQUE 
+  if (frames % 140 === 0) {
+    if (gains.length < 30) {
+      const gain = new Masque();
+      gains.push(gain);
+      //console.log("coucou");
     }
   }
 
+  gains.forEach(el => {
+    el.y +=5;
+    el.draw(); 
+  });
+
+  //--------------------------------------COLLISIONS OSBTACLES
+
+  for (const obst of obstacles) {
+    if (obst.hit(hero)) {
+      console.log("-1 points");
+      malus -= 1;
+      obstacles.splice(0,obst.hit(hero));
+    }
+  }
+  ctx.fillStyle = "rgb(227, 36, 36)";
+  ctx.fillRect(800, 0, 200,130);
+  ctx.fillStyle = "black";
   ctx.font = "50px Arial";
   ctx.textAlign = "right";
-  ctx.fillStyle = "red";
-  ctx.fillText(`${malus} pts`, W-50, 100);
+  ctx.fillText(`${malus} pts`, W-40, 80);
 
-//----------------------------------------TIME KEEPER
-  function counter () {
-time--;
-} 
+ //----------------------------------------COLLISIONS GAINS
+ for (const gain of gains) {
+  if (gain.hit(hero)) {
+    console.log("+1 point");
+    bonus += 1;
+    gains.splice(0,gain.hit(hero));
+  }
+}
+  ctx.fillStyle = "rgb(62, 220, 45)";
+  ctx.fillRect(0, 0, 200,130);
+  ctx.fillStyle = "black";
+  ctx.font = "50px Arial";
+  ctx.textAlign = "right";
+  ctx.fillText(`${bonus} pts`, 160, 80);
 
-startcounter = setInterval(counter, 5000);
-
-ctx.font = "50px Arial";
-ctx.textAlign = "left";
-ctx.fillStyle = "black";
-ctx.fillText(`${time} seconds`, W-600, 100);
-
+  //----------------------------------------STOP GAME MESSAGE
+  checkElaspedtime();
+  if (gameover) {
+    ctx.font = "200px Arial";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "black";
+    ctx.fillText(`It's over!!`, W-500, 750);
+    
+    ctx.font = "80px Arial";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "black";
+    ctx.fillText(`Final Score : ${bonus += malus} points`, W-500, 900);
+    
+    result();
+  }
+ 
 }
 
 // ----------------------------------------------------------------------------START GAME
@@ -100,11 +137,13 @@ function startGame() {
   if (raf) {
     cancelAnimationFrame(raf);
   }
-  
-  time = 10;
+ 
+  startAt = new Date().getTime();
   malus = 0;
+  bonus = 0;
   gameover = false; //au lancement game over = faux
-  hero = new Hero(); // création d'un hero
+  hero = new Hero(); // création d'un hero 
+  gains = [];// Création d'un tableau pour insertion des masques
   obstacles = []; // création d'un tableau pour insertion des virus
   animLoop(); // démarre la boucle d'animation
 }
@@ -114,8 +153,26 @@ document.getElementById("start-button").onclick = function() {
   startGame();
 }
 
-//----------------------------------------------------------------------------SCORE
+  //---------------------------------------------------------------------------TIME KEEPER and STOP GAME
 
-/*function scoreVirus(){
-  return point;*/
-//}
+  function checkElaspedtime(){
+    let elapsedTime = new Date().getTime() - startAt; 
+    if (elapsedTime > 20000){
+      gameover = true;
+    }
+  }
+
+//----------------------------------------------------------------------------WINNER/LOOSER
+
+function result(){
+  if (bonus+=malus > 0){
+    console.log("you win");
+  } else{
+    console.log("you loose");
+  }
+}
+
+//ajouter des gif = image et du son = balise audio
+//ajouter une page de lancement 
+//ajouter des type de gains 
+//resoudre le probleme de collision sur la bordure de l'image et pas sur le centre de l'image

@@ -2,25 +2,29 @@ function random(from, to) {
     return Math.floor(from + Math.random()*(to - from));
   }
 
-//-------------------------------------------------------------------------------Définitions des masques et gel 
+//-------------------------------------------------------------------------------Définitions des masques 
 //constructor avec 2 types
 
-/*class Masque {
+class Masque {
   constructor (){
-        this.h = 50;
-        this.w = random(W/3, 2/3*W); // between 1/3 and 2/3 of W
-        this.x = random(5, W-this.w);
-        this.y =-this.h;
+
+    const imgM = document.createElement('img');
+    imgM.onload = () => {
+      this.imgM = imgM;
+
+      const imgMRatio = imgM.naturalWidth/imgM.naturalHeight;
+      this.w = random(W/5, 1/5*W); // between 1/5 and 4/5 of W ;
+      this.x = random(0, W-this.w);
+      this.h = this.w/imgMRatio;
+      this.y = -this.h;
+        }
+    imgM.src = "images/masque.png";
   }
 
   draw(){
-      console.log('draw gel', this.x, this.y)
-
-      ctx.beginPath();
-      ctx.arc(this.x,this.y,75, 0, Math.PI*2)
-      ctx.strokeStyle = 'green'; 
-      ctx.stroke();
-      ctx.closePath();
+    if (!this.imgM) return; // si `this.imgV` n'est pas encore chargée => ne pas dessiner
+        ctx.drawImage(this.imgM, this.x, this.y, this.w, this.h);
+   
   }
   
   hit(hero){
@@ -29,4 +33,4 @@ function random(from, to) {
           &&
           (hero.y <= this.y+this.h && hero.y+hero.h >= this.y));
   }
-}*/
+}

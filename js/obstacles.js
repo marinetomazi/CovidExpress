@@ -6,18 +6,26 @@ function random(from, to) {
 
 class Virus {
     constructor (){
-          this.h = 20;
-          this.w = random(W/3, 2/3*W); // between 1/3 and 2/3 of W
-          this.x = random(0, W-this.w);
-          this.y =-this.h;
-          this.color = "blue";
+    
+    const imgV = document.createElement('img');
+
+    imgV.onload = () => {
+      this.imgV = imgV;
+
+      const imgVRatio = imgV.naturalWidth/imgV.naturalHeight;
+      this.w = random(W/5, 1/5*W); // between 1/5 and 4/5 of W ;
+      this.x = random(0, W-this.w);
+      this.h = this.w/imgVRatio;
+      this.y = -this.h;
+        }
+    imgV.src = "images/cartoon-virus-05.png";
     }
 
     draw(){
-        console.log('draw virus', this.x, this.y)
-        ctx.fillRect(this.x,this.y,this.w,this.h);
-        ctx.fillStyle = this.color;
+        if (!this.imgV) return; // si `this.imgV` n'est pas encore chargée => ne pas dessiner
+        ctx.drawImage(this.imgV, this.x, this.y, this.w, this.h);
     }
+   
     
     hit(hero){
         return (
@@ -26,35 +34,6 @@ class Virus {
             (hero.y <= this.y+this.h && hero.y+hero.h >= this.y));
     }
 }
-
-//-------------------------------------------------------------------------------Définitions des masques et gel 
-
-/*class Masque {
-  constructor (){
-        this.h = 50;
-        this.w = random(W/3, 2/3*W); // between 1/3 and 2/3 of W
-        this.x = random(5, W-this.w);
-        this.y =-this.h;
-  }
-
-  draw(){
-      console.log('draw gel', this.x, this.y)
-
-      ctx.beginPath();
-      ctx.arc(this.x,this.y,75, 0, Math.PI*2)
-      ctx.strokeStyle = 'green'; 
-      ctx.stroke();
-      ctx.closePath();
-  }
-  
-  hit(hero){
-      return (
-          (hero.x+hero.w >= this.x && hero.x <= this.x+this.w) 
-          &&
-          (hero.y <= this.y+this.h && hero.y+hero.h >= this.y));
-  }
-}*/
-
 
 
 
