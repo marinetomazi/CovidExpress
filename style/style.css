@@ -6,7 +6,6 @@ body{
     font-size: 20px;
     font-family: "Comic Sans MS";
     text-align: center;
-    display:flex;
     min-height:100vh;
 }
 
@@ -14,7 +13,7 @@ body{
     display:flex; flex-direction:column;
     justify-content:center; align-items:center;
     background-color: rgb(219, 223, 219);
-    width:500px;
+    min-height: 100vh;
   }
 
 #virus-presentation {
@@ -46,6 +45,8 @@ font-style: italic;
 #game-board{
 position: relative;
 flex:1;
+display:none;
+height: 100vh;
 }
 
 #game-board canvas{

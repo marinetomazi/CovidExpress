@@ -14,7 +14,7 @@ const H = ctx.canvas.height;
 
 // -----------------------------------------------------------------------------DRAWING x 1
 
-// téléchargment de l'image
+// téléchargment l'image du metro
 const metro = new Image();
 metro.src = "./images/metro NB.jpg" 
 
@@ -28,6 +28,13 @@ document.onkeydown = function (e) {
     case 40: hero.moveDown(); console.log('right', hero); break;
   }
 }
+// télécharger l'image winner
+const win = new Image();
+win.src = "./images/winner.png"
+
+// télécharger l'image du looser 
+const lose = new Image();
+lose.src ="./images/loser.png"
 
 //-----------------------------------------------------------------------------DRAWING x toutes les 16milisec
 
@@ -44,8 +51,7 @@ function draw(){
   if (frames % 150 === 0) {
     if (obstacles.length < 30) {
       const obst = new Virus();
-      obstacles.push(obst);
-      //console.log("coucou");
+      obstacles.push(obst); 
     }
   }
 
@@ -59,7 +65,6 @@ function draw(){
     if (gains.length < 30) {
       const gain = new Masque();
       gains.push(gain);
-      //console.log("coucou");
     }
   }
 
@@ -102,6 +107,8 @@ function draw(){
   //----------------------------------------STOP GAME MESSAGE
   checkElaspedtime();
   if (gameover) {
+    result();
+
     ctx.font = "200px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "black";
@@ -112,7 +119,6 @@ function draw(){
     ctx.fillStyle = "black";
     ctx.fillText(`Final Score : ${bonus += malus} points`, W-500, 900);
     
-    result();
   }
  
 }
@@ -151,8 +157,16 @@ function startGame() {
 //Lancement du jeu au click
 document.getElementById("start-button").onclick = function() {
   startGame();
-}
 
+  // game-presentation -> display:none
+  var element = document.querySelector(".game-presentation");
+  element.style.display = "none";
+
+  // game-board -> display:block
+  var element = document.querySelector('#game-board');
+  element.style.display = "block";
+
+}
   //---------------------------------------------------------------------------TIME KEEPER and STOP GAME
 
   function checkElaspedtime(){
@@ -167,12 +181,15 @@ document.getElementById("start-button").onclick = function() {
 function result(){
   if (bonus+=malus > 0){
     console.log("you win");
+    ctx.drawImage(win, 250, 225, W-500,H-450);
   } else{
-    console.log("you loose");
+    console.log("you lose");
+    ctx.drawImage(lose, 250, 225, W-500,H-450);
   }
 }
 
-//ajouter des gif = image et du son = balise audio
+//ajouter des image win lose ok 
+//Ajouter du son = balise audio
 //ajouter une page de lancement 
 //ajouter des type de gains 
-//resoudre le probleme de collision sur la bordure de l'image et pas sur le centre de l'image
+// des animations 

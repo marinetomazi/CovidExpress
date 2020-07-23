@@ -7,7 +7,7 @@ class Hero {
 
       const imgRatio = img.naturalWidth/img.naturalHeight;
       this.x = 400 ;
-      this.y = 980;
+      this.y = 600;
       this.w = 500 ;
       this.h = this.w/imgRatio;
     }
