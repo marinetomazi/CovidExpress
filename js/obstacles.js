@@ -2,6 +2,10 @@ function random(from, to) {
     return Math.floor(from + Math.random()*(to - from));
   }
 
+  //let images= []
+
+//function  randomindex ()// doit me sorti un nombre entre 0 et la length
+
 //----------------------------------------------------------------------------------Définition des virus
 
 class Virus {
@@ -19,6 +23,7 @@ class Virus {
       this.y = -this.h;
         }
     imgV.src = "images/cartoon-virus-081.png";
+    //imgV.src = images[randomIndex]
     }
 
     draw(){

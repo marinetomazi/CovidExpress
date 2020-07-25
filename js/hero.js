@@ -1,3 +1,5 @@
+const gravity = 2;
+
 class Hero {
     constructor(){
     //Définir mon héro avec une image
@@ -10,14 +12,18 @@ class Hero {
       this.y = 500;
       this.w = 250 ;
       this.h = this.w/imgRatio;
+
+      this.vy = 0; // vitesse verticale
     }
     img.src = "images/kid01.png";
     }
     
-    //faire apparaitre le hero dans le canvas
+    /*//faire apparaitre le hero dans le canvas
     draw(){
+
         if (!this.img) return; // si `this.img` n'est pas encore chargée => ne pas dessiner
-    ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+        ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+        
     }
 
     //faire bouger le hero à gauche 
@@ -31,17 +37,41 @@ class Hero {
        // if(this.x <= 500){
            this.x += 10;
        // } 
-    }
+    }*/
 
-    //faire bouger le hero vers le haut
-    moveUp(){
-        this.y -= 10;
-    }
+    //faire sauter le hero vers le haut
+    jump() {
+        this.vy = -25;
+      }
 
-    //faire bouger le hero vers le bas
-    moveDown(){
-        this.y += 10;
+    forward() {
+        if(this.x <= 500){
+            this.x += 10;
+    } 
+      }
+
+    backward() {
+        if(this.x >=0){
+            this.x -= 10;
         }
+      }
+
+    update() {
+        // on met a jour la position via les vitesses
+        this.y += this.vy;
+    
+        // on empeche d'aller plus bas que le sol
+        if (this.y > H - this.h) this.y = H - this.h;
+        
+        // la gravité s'applique
+        this.vy += gravity;
+      }
+
+    paint() {
+        if (!this.img) return; // si `this.img` n'est pas encore chargée => ne pas dessiner
+        ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+      }   
+   
 }
 
 

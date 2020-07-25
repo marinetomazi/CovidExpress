@@ -1,6 +1,4 @@
 
-
-
 body{
     margin:0;
     padding:0; 
@@ -9,6 +7,7 @@ body{
     font-family: "Comic sans MS";
     text-align: center;
     min-height:100vh;
+    background-color: grey;
 }
 
 .game-presentation {
@@ -16,53 +15,70 @@ body{
     justify-content:center; align-items:center;
     background-color: rgb(255, 255, 255);
     min-height: 100vh;
-    position: relative;
+
+  }
+
+  .presentation {
+      display: inline;
   }
 
 #train-presentation {
     width: 700px;
-    position: absolute;
+    position: relative;
     border-radius: 20%;
+    
 }
 
 #virus-presentation {
-   width: 300px;
-   position: relative ;
-   border: 3px solid rgb(250, 220, 53);
+   width: 330px;
+   position: absolute ;
+   border: 3px solid rgb(31, 30, 30);
    border-radius: 50%;
-   margin-left: 245px;
-   margin-bottom: 150px;
+   top:60px;
+   right:215px;
 }
 
 h1 {
-    font-size: 1.5em;
     -webkit-text-stroke: 2px black;
-    color :rgb(133, 153, 133);
-    position :relative;
+    color :rgb(246, 249, 244);
+    position :absolute;
     font-family: 'Faster One', cursive;
+    transform: rotate(-16deg);
+    letter-spacing: 5px;
+    bottom : 600px;
+
 }
 
 #arrow {
     width: 150px;
-    position: relative;
+    position: absolute;
 }
 
-body button {
-border-radius: 15%;
-padding: 10px 10px;
-background-color: rgb(170, 8, 8);
-font-size: 20px;
-font-family:"Comic Sans MS";
-color: white;
-font-style: italic;
-position :relative;
+#start-button {
+    border-radius: 15%;
+    padding: 10px 15px;
+    background-color: rgb(200, 98, 17);
+    font-family:'Faster One';
+    font-size: 30px;
+    color:black;
+    font-style: italic;
+    position :absolute;
+    right:280px;
+    top:425px;
+}
+
+p {
+    color:whitesmoke;
+    position: absolute;
+    bottom: 150px;
+
 }
 
 #game-board{
-position: relative;
-flex:1;
-display:none;
-height: 100vh;
+    position: relative;
+    flex:1;
+    display:none;
+    height: 100vh;
 }
 
 #game-board canvas{
@@ -71,3 +87,18 @@ height: 100vh;
     object-fit: contain;
     background-color: rgb(219, 223, 219);
 }
+
+
+#restart-button {
+    border-radius: 15%;
+    padding: 10px 15px;
+    background-color: rgb(200, 98, 17);
+    font-family:'Faster One';
+    font-size: 30px;
+    color:black;
+    font-style: italic;
+    position :absolute;
+    visibility: hidden;
+    margin-top: 680px;
+    }
+    
