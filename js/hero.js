@@ -7,11 +7,11 @@ class Hero {
 
       const imgRatio = img.naturalWidth/img.naturalHeight;
       this.x = 400 ;
-      this.y = 600;
-      this.w = 500 ;
+      this.y = 500;
+      this.w = 250 ;
       this.h = this.w/imgRatio;
     }
-    img.src = "images/kid.png";
+    img.src = "images/kid01.png";
     }
     
     //faire apparaitre le hero dans le canvas

@@ -13,12 +13,12 @@ class Masque {
       this.imgM = imgM;
 
       const imgMRatio = imgM.naturalWidth/imgM.naturalHeight;
-      this.w = random(W/5, 1/5*W); // between 1/5 and 4/5 of W ;
+      this.w = random(W/11, 1/11*W); // between 1/5 and 4/5 of W ;
       this.x = random(0, W-this.w);
       this.h = this.w/imgMRatio;
       this.y = -this.h;
         }
-    imgM.src = "images/masque.png";
+    imgM.src = "images/gel main bouteil 01.png";
   }
 
   draw(){

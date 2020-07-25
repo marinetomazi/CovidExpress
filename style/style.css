@@ -1,10 +1,12 @@
 
+
+
 body{
     margin:0;
     padding:0; 
     box-sizing: border-box; 
     font-size: 20px;
-    font-family: "Comic Sans MS";
+    font-family: "Comic sans MS";
     text-align: center;
     min-height:100vh;
 }
@@ -12,24 +14,37 @@ body{
 .game-presentation {
     display:flex; flex-direction:column;
     justify-content:center; align-items:center;
-    background-color: rgb(219, 223, 219);
+    background-color: rgb(255, 255, 255);
     min-height: 100vh;
+    position: relative;
   }
 
+#train-presentation {
+    width: 700px;
+    position: absolute;
+    border-radius: 20%;
+}
+
 #virus-presentation {
-   width: 400px;
-   border: 3px solid rgb(199, 198, 198);
+   width: 300px;
+   position: relative ;
+   border: 3px solid rgb(250, 220, 53);
    border-radius: 50%;
+   margin-left: 245px;
+   margin-bottom: 150px;
 }
 
 h1 {
     font-size: 1.5em;
     -webkit-text-stroke: 2px black;
-    color :rgb(133, 153, 133)
+    color :rgb(133, 153, 133);
+    position :relative;
+    font-family: 'Faster One', cursive;
 }
 
 #arrow {
     width: 150px;
+    position: relative;
 }
 
 body button {
@@ -40,6 +55,7 @@ font-size: 20px;
 font-family:"Comic Sans MS";
 color: white;
 font-style: italic;
+position :relative;
 }
 
 #game-board{

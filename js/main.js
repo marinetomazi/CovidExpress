@@ -48,7 +48,7 @@ function draw(){
   hero.draw();
 
   //----------------------------------------VIRUS
-  if (frames % 150 === 0) {
+  if (frames % 210 === 0) {
     if (obstacles.length < 30) {
       const obst = new Virus();
       obstacles.push(obst); 
@@ -61,7 +61,7 @@ function draw(){
   });
 
   //----------------------------------------MASQUE 
-  if (frames % 140 === 0) {
+  if (frames % 200 === 0) {
     if (gains.length < 30) {
       const gain = new Masque();
       gains.push(gain);
@@ -82,10 +82,14 @@ function draw(){
       obstacles.splice(0,obst.hit(hero));
     }
   }
-  ctx.fillStyle = "rgb(227, 36, 36)";
-  ctx.fillRect(800, 0, 200,130);
+ 
+  ctx.beginPath();
+  ctx.arc(925, 70, 50, 0, Math.PI * 2);
+  ctx.fillStyle = "rgb(222, 51, 82)"; 
+  ctx.fill();
+  ctx.closePath();
   ctx.fillStyle = "black";
-  ctx.font = "50px Arial";
+  ctx.font = "30px Arial";
   ctx.textAlign = "right";
   ctx.fillText(`${malus} pts`, W-40, 80);
 
@@ -97,27 +101,30 @@ function draw(){
     gains.splice(0,gain.hit(hero));
   }
 }
-  ctx.fillStyle = "rgb(62, 220, 45)";
-  ctx.fillRect(0, 0, 200,130);
+  ctx.beginPath();
+  ctx.arc(100, 70, 50, 0, Math.PI * 2);
+  ctx.fillStyle = "rgb(133, 200, 62)"; 
+  ctx.fill();
+  ctx.closePath();
   ctx.fillStyle = "black";
-  ctx.font = "50px Arial";
+  ctx.font = "30px Arial";
   ctx.textAlign = "right";
-  ctx.fillText(`${bonus} pts`, 160, 80);
+  ctx.fillText(`${bonus} pts`, 135, 80);
 
   //----------------------------------------STOP GAME MESSAGE
   checkElaspedtime();
   if (gameover) {
     result();
 
-    ctx.font = "200px Arial";
+    ctx.font = "100px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "black";
-    ctx.fillText(`It's over!!`, W-500, 750);
+    ctx.fillText(`Game Over`, W-500, 200);
     
-    ctx.font = "80px Arial";
+    ctx.font = "70px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "black";
-    ctx.fillText(`Final Score : ${bonus += malus} points`, W-500, 900);
+    ctx.fillText(`Final Score : ${bonus += malus} pts`, W-500, 800);
     
   }
  
@@ -179,17 +186,25 @@ document.getElementById("start-button").onclick = function() {
 //----------------------------------------------------------------------------WINNER/LOOSER
 
 function result(){
-  if (bonus+=malus > 0){
-    console.log("you win");
-    ctx.drawImage(win, 250, 225, W-500,H-450);
-  } else{
+  if (bonus+=malus < 0){
+
     console.log("you lose");
+    ctx.clearRect(0,0,W,H);
     ctx.drawImage(lose, 250, 225, W-500,H-450);
+
+  } else{
+
+    console.log("you win");
+    ctx.clearRect(0,0,W,H);
+    ctx.drawImage(win, 250, 225, W-500,H-450);
+
   }
 }
 
-//ajouter des image win lose ok 
+
 //Ajouter du son = balise audio
-//ajouter une page de lancement 
-//ajouter des type de gains 
-// des animations 
+//ajouter une page de lancement OK 
+//styliser les pages 
+//ajouter les polices avec font face 
+//ajouter des type de gains  horizontale et personnage qui saute 
+// des animations quand loser un virus se balade quand winner un masque se balade
