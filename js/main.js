@@ -98,7 +98,7 @@ function draw(){
   hero.paint();
 
   //----------------------------------------VIRUS 1
-  if (frames % 210 === 0) {
+  if (frames % 230 === 0) {
     if (obstacles.length < 30) {
       const obst = new Virus();
       obstacles.push(obst); 
@@ -239,6 +239,7 @@ function startGame() {
   gains = [];// Création d'un tableau pour insertion des masques
   obstacles = []; // création d'un tableau pour insertion des virus
   animLoop(); // démarre la boucle d'animation
+  
 }
 
   //Lancement du jeu au click
@@ -262,6 +263,18 @@ document.getElementById("start-button").onclick = function() {
       gameover = true;
     }
   }
+
+  var start = 60;
+  timer = setInterval(function() {  
+    if(start > 0){
+      start--;
+      document.querySelector('#canvas').innerHTML = "Time :"+ start +"secondes";
+    }
+    else {
+      clearInterval(timer);
+    }
+  },1000);
+
 //-----------------------------------------------------------------------------RESET
 
 function reset () {

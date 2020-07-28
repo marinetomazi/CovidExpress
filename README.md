@@ -27,17 +27,4 @@ Au stop du jeu : Affichage d'une image de winner ou de looser et du score total
 
 Bonus: Insérer de la musique ou effet sonore  lorsuqe qu'il y a une collision avec les objets de gain ou les obstacles
 
-Questions: Pour les images il y a une charte a respecter ? droit d'auteur ect???
-
-
-16/07/2020
-Briefing:
-Validation idée
-Mise en place de la structure du projet
-Construction HTML
-Construction CSS
-
-Nota:
-rame du dessus immobile et c'est le perso qui bouge
-avec des perso qui rentre dans le wagon 
 
