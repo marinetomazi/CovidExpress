@@ -21,7 +21,7 @@ class Hero {
     
     //definition des bougés du hero vers le haut
     jump() {
-        this.vy = -40;
+        this.vy = -30;
       }
 
     forward() {

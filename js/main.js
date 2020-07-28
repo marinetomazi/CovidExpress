@@ -4,7 +4,6 @@ let gains;
 let gameover;
 let malus;
 let bonus;
-let startAt;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -42,7 +41,7 @@ const pressed = {
 
       // LEFT
       case 37:
-      if (pressed.arrowleft) return; // STOP si touche déja enfoncée
+     // if (pressed.arrowleft) return; // STOP si touche déja enfoncée
       pressed.arrowleft = true;
   
       hero.backward(); // GO back
@@ -85,6 +84,22 @@ win.src = "./images/winner.png"
 // télécharger l'image du looser 
 const lose = new Image();
 lose.src ="./images/loser.png"
+
+//------------------------------------------TIMER
+var start = 30;
+function time() {
+  timer = setInterval(function() {  
+    if(start > 0){
+      start--;
+      console.log(start);
+    }
+    else {
+      clearInterval(timer);
+    }
+  },1000);
+  return start;
+ } 
+
 
 //-----------------------------------------------------------------------------DRAWING x toutes les 16milisec
 
@@ -191,7 +206,14 @@ function draw(){
   ctx.textAlign = "right";
   ctx.fillText(`${bonus} pts`, 135, 80);
 
-  //----------------------------------------STOP GAME MESSAGE
+//-------------------------------------------TIMER
+
+  ctx.fillStyle = "white";
+  ctx.font = "20px Concert One";
+  ctx.textAlign = "center";
+  ctx.fillText(`Next Stop in : ${start} seconds`,170, 350);
+
+//----------------------------------------STOP GAME MESSAGE
   checkElaspedtime();
   if (gameover) {
     result();
@@ -231,7 +253,7 @@ function startGame() {
     cancelAnimationFrame(raf);
   }
  
-  startAt = new Date().getTime();
+  start = 30;
   malus = 0;
   bonus = 0;
   gameover = false; //au lancement game over = faux
@@ -239,6 +261,7 @@ function startGame() {
   gains = [];// Création d'un tableau pour insertion des masques
   obstacles = []; // création d'un tableau pour insertion des virus
   animLoop(); // démarre la boucle d'animation
+  time();
   
 }
 
@@ -258,22 +281,13 @@ document.getElementById("start-button").onclick = function() {
 //---------------------------------------------------------------------------TIME KEEPER and STOP GAME
 
   function checkElaspedtime(){
-    let elapsedTime = new Date().getTime() - startAt; 
-    if (elapsedTime > 20000){
+    //let elapsedTime = new Date().getTime() - startAt; 
+    //if (elapsedTime > 28000){
+      if(start === 0){
       gameover = true;
     }
   }
 
-  var start = 60;
-  timer = setInterval(function() {  
-    if(start > 0){
-      start--;
-      document.querySelector('#canvas').innerHTML = "Time :"+ start +"secondes";
-    }
-    else {
-      clearInterval(timer);
-    }
-  },1000);
 
 //-----------------------------------------------------------------------------RESET
 
