@@ -2,6 +2,7 @@ const gravity = 2;
 
 class Hero {
     constructor(){
+
     //Définir mon héro avec une image
         const img = document.createElement('img');
     img.onload = () => {
@@ -18,41 +19,20 @@ class Hero {
     img.src = "images/kid01.png";
     }
     
-    /*//faire apparaitre le hero dans le canvas
-    draw(){
-
-        if (!this.img) return; // si `this.img` n'est pas encore chargée => ne pas dessiner
-        ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-        
-    }
-
-    //faire bouger le hero à gauche 
-    moveLeft(){
-       // if(this.x >=0){
-            this.x -= 10;
-        //}
-    }
-    //faire bouger le hero à droite 
-    moveRight(){
-       // if(this.x <= 500){
-           this.x += 10;
-       // } 
-    }*/
-
-    //faire sauter le hero vers le haut
+    //definition des bougés du hero vers le haut
     jump() {
-        this.vy = -25;
+        this.vy = -40;
       }
 
     forward() {
-        if(this.x <= 500){
-            this.x += 10;
+        if(this.x <= 800){
+            this.x += 50;
     } 
       }
 
     backward() {
-        if(this.x >=0){
-            this.x -= 10;
+        if(this.x >=50){
+            this.x -= 50;
         }
       }
 

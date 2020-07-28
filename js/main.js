@@ -6,6 +6,10 @@ let malus;
 let bonus;
 let startAt;
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+};
+
 // ------------------------------------------------------------------------------CANVAS
 
 const ctx = document.querySelector("canvas").getContext("2d");
@@ -27,12 +31,11 @@ const pressed = {
 
   document.onkeydown = function (e) {
   switch (e.keyCode) {
+
       // SPACE
       case 32:
-      if (pressed.space) return; // STOP si touche déja enfoncée
+      if (hero.y + hero.h < H) return; // STOP si touche déja enfoncée
       pressed.up = true;
-      /*setInterval(() => { hero.jump()
-      }, 500);*/
   
       hero.jump(); // jump hero 🦘
       break;
@@ -44,6 +47,7 @@ const pressed = {
   
       hero.backward(); // GO back
       break;
+
       // RIGHT
       case 39:
       if (pressed.arrowright) return; // STOP si touche déja enfoncée
@@ -53,10 +57,11 @@ const pressed = {
       break;
       }
   }
+
   document.onkeyup = function (e) {
   switch (e.keyCode) {
       // SPACE
-       case 38:
+       case 32:
       // on "libère" l'etat d'enfoncement de la touche
       pressed.space = false; 
       break;
@@ -64,30 +69,14 @@ const pressed = {
       case 37:
       // on "libère" l'etat d'enfoncement de la touche
       pressed.arrowleft = false; 
-  
-      // on annule la vitesse horizontale
-      mario.vx = 0; 
-       break;
+
       // ARROWRIGHT
       case 39:
       // on "libère" l'etat d'enfoncement de la touche
       pressed.arrowright = false;
-  
-      // on annule la vitesse horizontale
-      mario.vx = 0; 
-      break;
+
       }
   }
-/*// mouvements du hero en réponse aux touches
-document.onkeydown = function (e) {
-  if (!hero) return; // si hero est undefined STOP
-  switch (e.keyCode) {
-    case 37: hero.moveLeft();  console.log('left',  hero); break;
-    case 39: hero.moveRight(); console.log('right', hero); break;
-    case 38: hero.moveUp(); console.log('right', hero); break;
-    case 40: hero.moveDown(); console.log('right', hero); break;
-  }
-}*/
 
 // télécharger l'image winner
 const win = new Image();
@@ -101,7 +90,6 @@ lose.src ="./images/loser.png"
 
 function draw(){
   
- 
   ctx.clearRect(0,0,W,H); // eponge
 
   //----------------------------------------METRO & HERO
@@ -109,7 +97,7 @@ function draw(){
   hero.update();
   hero.paint();
 
-  //----------------------------------------VIRUS
+  //----------------------------------------VIRUS 1
   if (frames % 210 === 0) {
     if (obstacles.length < 30) {
       const obst = new Virus();
@@ -123,18 +111,47 @@ function draw(){
     element.draw(); 
   });
 
-  //----------------------------------------MASQUE 
+  //----------------------------------------VIRUS 2
+  if (frames % 190 === 0) {
+    if (obstacles.length < 30) {
+      const obst2 = new Virus2();
+      obstacles.push(obst2); 
+    }
+  }
+
+  obstacles.forEach(element => {
+    element.y +=2;
+    element.x +=4;
+    element.draw(); 
+  });
+
+  //----------------------------------------GEL 
   if (frames % 200 === 0) {
-    if (gains.length < 30) {
-      const gain = new Masque();
+    if (gains.length < 50) {
+      const gain = new Gel();
       gains.push(gain);
     }
   }
 
   gains.forEach(el => {
     el.y +=5;
+    el.x +=2;
     el.draw(); 
   });
+
+    //----------------------------------------MASQUE
+    if (frames % 220 === 0) {
+      if (gains.length < 50) {
+        const gain2 = new Masque();
+        gains.push(gain2);
+      }
+    }
+  
+    gains.forEach(el => {
+      el.y +=4;
+      el.x -=4;
+      el.draw(); 
+    });
 
   //--------------------------------------COLLISIONS OSBTACLES
 
@@ -178,15 +195,15 @@ function draw(){
   checkElaspedtime();
   if (gameover) {
     result();
-
-    ctx.font = "100px Arial";
-    ctx.textAlign = "center";
-    ctx.fillStyle = "black";
-    ctx.fillText(`Game Over`, W-500, 200);
     
-    ctx.font = "70px Arial";
+    ctx.font = "100px Concert One";
     ctx.textAlign = "center";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
+    ctx.fillText(`Game Over`, W-500, 150);
+    
+    ctx.font = "70px Concert One";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
     ctx.fillText(`Final Score : ${bonus += malus} pts`, W-500, 800);
     
   }
@@ -261,12 +278,16 @@ function result() {
 		ctx.clearRect(0, 0, W, H);
     ctx.drawImage(lose, 250, 225, W - 500, H - 450);
     reset();
+    var element = document.querySelector('#loser-gif');
+    element.style.visibility = "visible";
 	}
 	if (bonus + malus > 0) {
 		console.log("you win");
 		ctx.clearRect(0, 0, W, H);
     ctx.drawImage(win, 250, 225, W - 500, H - 450);
     reset();
+    var element = document.querySelector('#winner-gif');
+    element.style.visibility = "visible";
 	}
 }
 
@@ -276,17 +297,21 @@ function result() {
 
     var element = document.querySelector('#restart-button');
     element.style.visibility = "hidden";
+
+    var element = document.querySelector('#winner-gif');
+    element.style.visibility = "hidden";
+
+    var element = document.querySelector('#loser-gif');
+    element.style.visibility = "hidden";
+
   }
 
 
 
  //ajouter une page de lancement OK
 // fonction reset ok
-// saut du hero ok mais sort du canvas Nok
-// image winner looser nok
+// image winner looser ok
+// saut du hero ok quand je reste enfoncé sur la touche left il ne bouge pas 
 //styliser les pages nok 
-
-
-//ajouter des type de gains horizontale et personnage qui saute 
 // des animations quand loser un virus se balade quand winner un masque se balade
 //Ajouter du son = balise audio

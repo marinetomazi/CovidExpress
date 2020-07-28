@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>COVID EXPRESS GAME</title>
-    <link rel="stylesheet" href="style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css"/>
 </head>
 <body>
 
     <div class ="game-presentation">
       <div class ="presentation">
         <img  id="train-presentation" src="images/train presentation.jpg" alt="train de présentation du jeu"/>
-        <img  id="virus-presentation" src="images/virus presentation.png" alt="image de présentation du jeu"/>
-        <h1>COVID EXPRESS</h1>
+        <img id="virus-gif" src ="https://media.giphy.com/media/UUsOy6IWmzw6mmeOpQ/giphy.gif" alt ="gif virus"/>
+        <img id="panneau-covid" src ="images/panneau.gif" alt ="gif panneau"/>
+        <p>You have 60 seconds to save his life ! Use Arrowleft, ArrowRight and Space</p>
         <button id="start-button">Let's Go !</button>
-        <p>Use the left and right arrow to control the hero and Save his life ! &#128170</p>
-        <img id="arrow" src="images/arrows.png" alt="image des fleches"/>
       </div>
     </div>
 
     <div id="game-board">
+      <img id="loser-gif" src ="https://media.giphy.com/media/Y3YqyaoJorGHbtVGpJ/giphy.gif" alt ="gif loser"/>
+      <img id="winner-gif" src ="https://media.giphy.com/media/UodwSIvYidsdVvuyvg/giphy.gif" alt ="gif winner"/>
       <canvas id="canvas" width="1000" height="900"></canvas>
       <button id="restart-button">Try Again</button>
     </div>
