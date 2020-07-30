@@ -1,11 +1,13 @@
-Concernant mon jeu : COVID EXPRESS
+CONTEXTE:
 
--Contexte : dans une station de métro
+Nom du jeu : COVID EXPRESS
 
--Personnage: 1 personnage qui peut se déplacer de gauche à droite et et sauter et/ou se baisser
+Objectif du jeu : Le personnage doit collecter un maximum de masque et de tube de gel hydroalcoolique (+ 1point/item) et limiter les contact avec le virus du COVID (-1 point/item) le temps d'un trajet entre 2 stations de metro, soit 20 secondes.
+Pour sauver sa vie et gagner la partie : le score doit être supérieur a zéro.
 
--L'objectif du jeu : Le personnage doit récupérer un maximum de masque et de tube de gel hydroalcoolique (+1point) et limiter les contact avec le virus du COVID (-2 points) en un temps imparti (1min par exemple). 
-Pour gagner il faut obtenir un score > 0.
+Mouvements du personnage : ArrowLeft : déplacement sur la gauche, ArrowRight: déplacement sur la droite, Space : Saut
+
+LOGIQUE DE JEU:
 
 Principales fonctions:
 

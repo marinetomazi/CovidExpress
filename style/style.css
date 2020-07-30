@@ -85,6 +85,7 @@ p {
     padding:30px
 }
 
+
 #game-board{
     position: relative;
     flex:1;
@@ -107,24 +108,33 @@ p {
     color:whitesmoke;
     position :absolute;
     visibility: hidden;
-    top: 450px;
+    top:50%;
+    right: 15%;
+    transform: translate(-50%, -15%);
     }
 
    #loser-gif {
     width: 350px;
     visibility : hidden;
-    position: relative;
-    top:235px;
-    right:310px;
+    position: absolute;
+    top:35%;
+    left: 15%;
+    transform: translate(-35%, -15%);
    }
 
    #winner-gif {
     width: 300px;
     height: 450px;
-    position: relative;
     visibility : hidden;
-    top:260px;
-    right:650px;
+    position: absolute;
+    top:35%;
+    left: 15%;
+    transform: translate(-35%, -15%);
    }
    
     
+
+
+
+
+

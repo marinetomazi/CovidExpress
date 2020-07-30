@@ -4,6 +4,9 @@ let gains;
 let gameover;
 let malus;
 let bonus;
+let soundStart = new Audio('audio/jingle-ratp-01.mp3');
+let soundGame = new Audio('audio/train.mp3');
+let soundEnd = new Audio('audio/mp05-signal-sonore-et-fermeture-des-portes.mp3');
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -100,7 +103,6 @@ function time() {
   return start;
  } 
 
-
 //-----------------------------------------------------------------------------DRAWING x toutes les 16milisec
 
 function draw(){
@@ -174,7 +176,8 @@ function draw(){
     if (obst.hit(hero)) {
       console.log("-1 points");
       malus -= 1;
-      obstacles.splice(0,obst.hit(hero));
+      const obstIndex = obstacles.indexOf(obst)
+      obstacles.splice(obstIndex, 1);
     }
   }
  
@@ -193,7 +196,8 @@ function draw(){
   if (gain.hit(hero)) {
     console.log("+1 point");
     bonus += 1;
-    gains.splice(0,gain.hit(hero));
+    const gainIndex = gains.indexOf(gain)
+    gains.splice(gainIndex, 1);
   }
 }
   ctx.beginPath();
@@ -262,6 +266,8 @@ function startGame() {
   obstacles = []; // création d'un tableau pour insertion des virus
   animLoop(); // démarre la boucle d'animation
   time();
+  soundGame.volume = 0.3;
+  soundGame.play();
   
 }
 
@@ -285,6 +291,9 @@ document.getElementById("start-button").onclick = function() {
     //if (elapsedTime > 28000){
       if(start === 0){
       gameover = true;
+      soundGame.pause();
+      soundEnd.volume = 0.5;
+      soundEnd.play();
     }
   }
 
@@ -321,6 +330,7 @@ function result() {
   //Relance du jeu au click
   document.getElementById("restart-button").onclick = function() {
     startGame();
+    soundEnd.pause();
 
     var element = document.querySelector('#restart-button');
     element.style.visibility = "hidden";
