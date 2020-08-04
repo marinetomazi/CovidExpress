@@ -89,7 +89,7 @@ const lose = new Image();
 lose.src ="./images/loser.png"
 
 //------------------------------------------TIMER
-var start = 30;
+var start = 20;
 function time() {
   timer = setInterval(function() {  
     if(start > 0){
@@ -257,7 +257,7 @@ function startGame() {
     cancelAnimationFrame(raf);
   }
  
-  start = 30;
+  start = 20;
   malus = 0;
   bonus = 0;
   gameover = false; //au lancement game over = faux
@@ -269,7 +269,7 @@ function startGame() {
   soundGame.volume = 0.3;
   soundGame.play();
   
-}
+  }
 
   //Lancement du jeu au click
 document.getElementById("start-button").onclick = function() {
@@ -327,7 +327,8 @@ function result() {
 	}
 }
 
-  //Relance du jeu au click
+  //---------------------------------------------------Relance du jeu au click
+  
   document.getElementById("restart-button").onclick = function() {
     startGame();
     soundEnd.pause();
@@ -342,13 +343,3 @@ function result() {
     element.style.visibility = "hidden";
 
   }
-
-
-
- //ajouter une page de lancement OK
-// fonction reset ok
-// image winner looser ok
-// saut du hero ok quand je reste enfoncé sur la touche left il ne bouge pas 
-//styliser les pages nok 
-// des animations quand loser un virus se balade quand winner un masque se balade
-//Ajouter du son = balise audio

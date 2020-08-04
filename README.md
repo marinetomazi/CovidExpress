@@ -1,4 +1,4 @@
-CONTEXTE:
+*1* CONTEXTE:
 
 Nom du jeu : COVID EXPRESS
 
@@ -7,26 +7,36 @@ Pour sauver sa vie et gagner la partie : le score doit être supérieur a zéro.
 
 Mouvements du personnage : ArrowLeft : déplacement sur la gauche, ArrowRight: déplacement sur la droite, Space : Saut
 
-LOGIQUE DE JEU:
+*2* STRUCTURE DU JEU:
 
-Principales fonctions:
+Dossier COVID EXPRESS
+    index.HTML
+Dossier STYLE 
+    style.css
+Dossier JS 
+    Hero.js
+        Utilisation d'un Class + Méthode
+    gain.js
+        Utilisation de 2 Class + Méthode + fonction aléatoire
+    main.js
+        Définition des variables ext + fonction aléatoire
+        Définition du canvas 
+        Téléchargement d'images
+        Définition des mouvements du héro en fonction des événements
+        Définition du temps de jeu
+        Fonction principale de définition du canvas (16ms)
+        Définition de la boucle d'animation de lancement du jeu
+        Fonction d'arrêt du jeu
+        Fonction reset 
+        Fonction résultat de jeu (win/lose)
+        Définition des événements au click du bouton restart
+    obstacles.js
+        Utilisation de 2 Class + Méthode + fonction alétoire
+Dossier AUDIO
+Dossier IMAGES
 
-Page de lancement : image de présentation et bouton de lancement du jeu
+*3* LOGIQUE DE JEU:
 
-Contexte du jeu: Background avec image dynamique en boucle (voir un métro passé)
-
-Personnage: doit répondre aux événements (haut bas gauche droite)
-
-Objets du gain : masques et tube de gel : doivent apparaître de manière et de vitesse aléatoire, doivent comptabiliser +1 point dans le score total a chaque "collisions" avec le personnage
-
-Obstacles : des virus : doivent apparaître de manière et de vitesse aléatoire, doivent comptabiliser -2 points dans le score total a chaque "collisions" avec le personnage
-
-Temps de jeu: avoir un affichage avec le décompte du temps restant et lorsque temps de jeu = 0 alors le jeu se stop
-
-Score Total : avoir un affichage du score total  avec les fonctions suivantes : Addition ou soustraction des points en fonction des types de collisions.
-
-Au stop du jeu : Affichage d'une image de winner ou de looser et du score total
-
-Bonus: Insérer de la musique ou effet sonore  lorsuqe qu'il y a une collision avec les objets de gain ou les obstacles
-
-
+Page de présentation de jeu : Utilisation HTML + CSS 
+Plateau de jeu : Utilisation <Canvas> + <img> 
+Page de fin de jeu : Utilisation <Canvas> + <img>
